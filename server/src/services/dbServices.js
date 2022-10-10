@@ -5,6 +5,7 @@ const getQuery = (queryString) => {
 
     // returns a callback express function used for routing
     return (req, res, next) => {
+        console.log("Request Made!")
         pool.query(queryString, (error, results) => {
             if (error) {
                 throw error

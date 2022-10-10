@@ -1,0 +1,37 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Drinks API",
+    "version": "1.0.0",
+    "description": "An API for my portfolio application. API for drink orders, drinks, and users.",
+    "contact": {
+      "email": "inet2@otterstad.name",
+      "name": "Marcus Otterstad"
+    }
+  },
+  "paths": {
+    "/menu": {
+      "summary": "A menu of all drinks the bar is selling.",
+      "get": {
+        "summary": "get list of all items in menu",
+        "description": "",
+        "operationId": "getMenu",
+        "responses": {
+          "default": {
+            "description": "Default error sample response"
+          }
+        }
+      },
+      "put": {
+        "summary": "Edit the price of a single menu item",
+        "description": "",
+        "operationId": "editPrice",
+        "responses": {
+          "default": {
+            "description": "Default error sample response"
+          }
+        }
+      }
+    }
+  }
+}

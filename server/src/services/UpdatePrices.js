@@ -29,8 +29,8 @@ async function updatePrices (timeFrame) {
 
 
 //send those previous drink prices to the price_history table
-    /*
-    client.query(format('INSERT INTO price_history (drink_id, price) VALUES %L', currentDrinkPrices.rows), [], (err, result)=>{
+    
+    /*client.query(format('INSERT INTO price_history (drink_id, price) VALUES %L', currentDrinkPrices.rows), [], (err, result)=>{
         console.log(err);
         console.log(result);
     });*/
@@ -51,11 +51,16 @@ async function updatePrices (timeFrame) {
         text: `SELECT drink_id, min_price, max_price, target_orders FROM drinks`
     });
 
-//joins these two tables together into list of objects
+//joins these two tables together into a list of objects
     const formattedRows = formatDrinkQueries(orderCount.rows, drinkInformation.rows);
 
     for(var row of formattedRows) {
-        const calculatedPrice = calculateDrinkPrice()
+
+        const calculatedPrice = calculateDrinkPrice(row.amountOrdered, row.minPrice, row.maxPrice, row.targetOrdered);
+        await client.query('UPDATE drinks SET current_price=$1 WHERE drink_id=$2', [calculatedPrice, row.drinkId], (err, result)=>{
+            console.log(err);
+            console.log(result);
+        });
     }
 
 //end current database client connecton

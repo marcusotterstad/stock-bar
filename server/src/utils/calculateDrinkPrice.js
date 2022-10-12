@@ -14,7 +14,6 @@ module.exports = calculateDrinkPrice = function (amountOrdered, minPrice, maxPri
     if (calculatedPrice > maxPrice) {
         calculatedPrice = maxPrice;
     }
-
     return calculatedPrice;
 
 };

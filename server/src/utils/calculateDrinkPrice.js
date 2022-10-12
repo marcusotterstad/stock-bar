@@ -2,7 +2,7 @@
 // based on ratio between target orders and amount of orders, and returns the new price. 
 
 
-const calculateDrinkPrice = function (amountOrdered, minPrice, maxPrice, targetOrdered) {
+module.exports = calculateDrinkPrice = function (amountOrdered, minPrice, maxPrice, targetOrdered) {
     const basePrice = (minPrice+maxPrice)/2;
     const percentageIncrease = amountOrdered/targetOrdered;
 
@@ -19,4 +19,3 @@ const calculateDrinkPrice = function (amountOrdered, minPrice, maxPrice, targetO
 
 };
 
-module.exports = {calculateDrinkPrice: calculateDrinkPrice};

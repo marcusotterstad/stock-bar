@@ -10,7 +10,7 @@ const formatDrinkQueries = require('../utils/formatDrinkQueries');
 
 /*  
 Description:
-    This function selects the amount of drinks has been ordered within a timeframe,
+    This function selects how many drinks that have been ordered within a timeframe,
     and updates the price of a drink based on how many orders. It first stores the
     current price of each drink into the price_history table. Then it queries the
     database on how many of each drink has been ordered, feeds that into the function 
@@ -54,17 +54,18 @@ async function updatePrices (timeFrame) {
 //joins these two tables together into a list of objects
     const formattedRows = formatDrinkQueries(orderCount.rows, drinkInformation.rows);
 
+//update current_price of each drink
     for(var row of formattedRows) {
-
-        const calculatedPrice = calculateDrinkPrice(row.amountOrdered, row.minPrice, row.maxPrice, row.targetOrdered);
+    const calculatedPrice = calculateDrinkPrice(row.amountOrdered, row.minPrice, row.maxPrice, row.targetOrdered);
         await client.query('UPDATE drinks SET current_price=$1 WHERE drink_id=$2', [calculatedPrice, row.drinkId], (err, result)=>{
-            console.log(err);
-            console.log(result);
         });
     }
 
+
 //end current database client connecton
     await client.end()
+    console.log(`${formattedRows.length} prices updated.`);
+    return;
 }
 
 updatePrices(200);

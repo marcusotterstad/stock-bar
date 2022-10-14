@@ -1,9 +1,10 @@
 const pool = require('../configs/db.config');
-const format = require('pg-format');
 
-//helper functions in /utils
+
+//helper functions
 const calculateDrinkPrice = require('../utils/calculateDrinkPrice');
 const formatDrinkQueries = require('../utils/formatDrinkQueries');
+const format = require('pg-format');
 
 
 // A function that updates drink prices in the database every x minutes (timeFrame).
@@ -14,10 +15,11 @@ Description:
     and updates the price of a drink based on how many orders. It first stores the
     current price of each drink into the price_history table. Then it queries the
     database on how many of each drink has been ordered, feeds that into the function 
-    calculateDrinkPrice, and then updates every drink price.
+    calculateDrinkPrice, and then updates every drink price in the "drinks" SQL table.
 */
 
 async function updatePrices (timeFrame) {
+
 //setup client database connection
     const client = await pool.connect()
 
@@ -29,11 +31,8 @@ async function updatePrices (timeFrame) {
 
 
 //send those previous drink prices to the price_history table
-    
-    /*client.query(format('INSERT INTO price_history (drink_id, price) VALUES %L', currentDrinkPrices.rows), [], (err, result)=>{
-        console.log(err);
-        console.log(result);
-    });*/
+    client.query(format('INSERT INTO price_history (drink_id, price) VALUES %L', currentDrinkPrices.rows), [], (err, result)=>{
+    });
 
 //select total orders of each drink within the timeFrame parameter
     const orderCount = await client.query({
@@ -53,19 +52,22 @@ async function updatePrices (timeFrame) {
 
 //joins these two tables together into a list of objects
     const formattedRows = formatDrinkQueries(orderCount.rows, drinkInformation.rows);
-
+    
 //update current_price of each drink
     for(var row of formattedRows) {
-    const calculatedPrice = calculateDrinkPrice(row.amountOrdered, row.minPrice, row.maxPrice, row.targetOrdered);
-        await client.query('UPDATE drinks SET current_price=$1 WHERE drink_id=$2', [calculatedPrice, row.drinkId], (err, result)=>{
+        const calculatedPrice = calculateDrinkPrice(row.amountOrdered, row.minPrice, row.maxPrice, row.targetOrdered);
+        console.log(calculatedPrice);
+        client.query('UPDATE drinks SET current_price=$1 WHERE drink_id=$2;', [calculatedPrice, row.drinkId], (err, result)=>{
+            if(err) {
+                console.log(err);
+            }
         });
     }
 
-
 //end current database client connecton
-    await client.end()
     console.log(`${formattedRows.length} prices updated.`);
+    client.release();
     return;
 }
 
-updatePrices(200);
+module.exports = updatePrices;

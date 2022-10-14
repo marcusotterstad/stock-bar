@@ -28,13 +28,13 @@ module.exports = formatDrinkQueries = function (orderCount, drinkInformation) {
         let matching = false;
         for(var ordRow of orderCount) {
             if(ordRow[0] === drinkRow[0]) {
-                    const formattedObject = {drinkId: drinkRow[0], amountOrdered: parseInt(ordRow[1]), minPrice: drinkRow[1], maxPrice: drinkRow[2], targetOrdered: drinkRow[3]}
+                    const formattedObject = {drinkId: drinkRow[0], amountOrdered: parseInt(ordRow[1]), minPrice: parseFloat(drinkRow[1]), maxPrice: parseFloat(drinkRow[2]), targetOrdered: parseFloat(drinkRow[3])}
                     returnArr.push(formattedObject)
                     matching = true;
             }
         }
         if(!matching) {
-            const formattedObject = {drinkId: drinkRow[0], amountOrdered: 0, minPrice: drinkRow[1], maxPrice: drinkRow[2], targetOrdered: drinkRow[3]}
+            const formattedObject = {drinkId: drinkRow[0], amountOrdered: 0, minPrice: parseFloat(drinkRow[1]), maxPrice: parseFloat(drinkRow[2]), targetOrdered: parseFloat(drinkRow[3])}
             returnArr.push(formattedObject)
         }
     }

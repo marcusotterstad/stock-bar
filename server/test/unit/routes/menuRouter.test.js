@@ -4,7 +4,7 @@ const pool = require('../../../src/configs/db.config')
 
 const app = require('../../../index');
 
-describe('/menu', () => { 
+describe('GET /menu', () => { 
     test("should return 200", async () => {
         const response = await request(app).get("/menu");
         
@@ -19,7 +19,7 @@ describe('/menu', () => {
     }); 
 });
 
-describe('/menu/:drink-id/price-history', () => {
+describe('GET /menu/:drink-id/price-history', () => {
     test("valid query should return 200", async () => {
         const response = await request(app).get("/menu/1/price-history");
         

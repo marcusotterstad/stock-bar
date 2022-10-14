@@ -10,7 +10,7 @@ const updatePrices = require('./src/services/UpdatePrices');
 
 //Routers
 const ordersRouter = require('./src/routes/ordersRouter');
-app.use("/orders", ordersRouter);
+app.use("/order", ordersRouter);
 
 const menuRouter = require('./src/routes/menuRouter');
 app.use("/menu", menuRouter);
@@ -19,9 +19,9 @@ app.get('/', (req, res, next) => {
     res.status(200).json({message: "Server up and running"});
 })
 
-app.listen(PORT, () => {
-    console.log(`App listening on port ${PORT}`)
-  })
+if (process.env.NODE_ENV !== 'test') {
+  app.listen(PORT, () => console.log(`Listening on port ${PORT}`))
+}
 
 cron.schedule(`*/${timeFrame} * * * *`, () => {
   updatePrices(timeFrame);

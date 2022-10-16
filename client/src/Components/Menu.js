@@ -1,17 +1,12 @@
 import React, { useState, useEffect } from "react";
+const {DrinkList} = require('./DrinkList');
 
 export default function Menu() {
- const [data, setData] = useState(null);
 
- useEffect(() => {
-    const fetchData = async () => {
-      await fetch("http://localhost:3000/")
-    .then((response) => response.json())
-    .then((response) => setData(response.message));
-  }
-  fetchData();
-   
- }, []);
-
- return (<div>{data}</div>);
+  return (
+  <div>
+    <h1 className="text-end me-4">Drink stock exchange</h1>
+    <DrinkList />
+  </div>
+  );
 }

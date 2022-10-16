@@ -29,7 +29,6 @@ async function updatePrices (timeFrame) {
     text: 'SELECT drink_id, current_price FROM drinks',
     });
 
-
 //send those previous drink prices to the price_history table
     client.query(format('INSERT INTO price_history (drink_id, price) VALUES %L', currentDrinkPrices.rows), [], (err, result)=>{
     });

@@ -1,7 +1,7 @@
 {
   "name": "drinks-api",
   "version": "1.0.0",
-  "description": "",
+  "description": "API for drinks PERN application",
   "main": "index.js",
   "scripts": {
     "test": "jest --runInBand",
@@ -12,7 +12,6 @@
   "dependencies": {
     "@types/pg": "^8.6.5",
     "body-parser": "^1.20.0",
-    "chi": "^0.0.10",
     "cors": "^2.8.5",
     "express": "^4.18.1",
     "node-cron": "^3.0.2",
@@ -25,7 +24,6 @@
     "@types/supertest": "^2.0.12",
     "mocha": "^10.0.0",
     "supertest": "^6.3.0",
-    "chai": "^4.3.6",
     "jest": "^29.1.2",
     "nodemon": "^2.0.19"
   }

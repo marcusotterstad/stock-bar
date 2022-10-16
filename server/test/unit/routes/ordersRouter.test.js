@@ -17,19 +17,7 @@ describe('GET /order/unfulfilled', () => {
     }); 
 });
 
-describe('PUT /order/complete-order/:orderId', () => {
-    /*beforeAll(() => {
-        const client = pool.connect();
-      });
-
-    afterAll(() => {
-        client.release();
-    });   
-
-    afterEach(() => {
-        client.query('UPDATE "order" SET fulfilled=false WHERE order_id=1');
-    });*/
-    
+describe('PUT /order/complete-order/:orderId', () => {    
     test("valid query should return 200", async () => {
         const response = await request(app)
         .put("/order/complete-order/1")

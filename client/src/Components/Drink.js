@@ -18,6 +18,7 @@ export function Drink({id, name, description, price}) {
                 <p className="text-success">{price} kr <BsFillCaretUpFill/>({random_percentage})</p>
             }</td>
             <td>{description}</td>
+            <td><button className="btn-success" onClick={() => console.log("button clicked")}>Order</button></td>
         </tr>
         )
     }

@@ -20,11 +20,14 @@ app.get('/', (req, res, next) => {
 })
 
 if (process.env.NODE_ENV !== 'test') {
-  app.listen(PORT, () => console.log(`Listening on port ${PORT}`))
+  app.listen(PORT, () => {
+    console.log(`Listening on port ${PORT} \nUpdating drink prices every ${timeFrame} minutes`)}
+  )
 }
 
-cron.schedule(`*/${timeFrame} * * * *`, () => {
-  updatePrices(timeFrame);
-});
+
+//cron.schedule(`*/${timeFrame} * * * *`, () => {
+// updatePrices(timeFrame);
+//});
 
 module.exports = app;

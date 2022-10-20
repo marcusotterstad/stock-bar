@@ -1,6 +1,6 @@
 import React from 'react';
 import { BsFillCaretUpFill,BsFillCaretDownFill } from "react-icons/bs";
-
+import { Link } from 'react-router-dom';
 
 export function Drink({id, name, description, price}) {
     // TODO: implement through api up or down percentage
@@ -10,7 +10,7 @@ export function Drink({id, name, description, price}) {
     return (
         <tr>
             <th scope="row">{id}</th>
-            <td>{name}</td>
+            <td><Link to={`/menu/${id}`}>{name}</Link></td>
             <td>
             {random_boolean ? 
                 <p className="text-danger">{price} kr <BsFillCaretDownFill/>({random_percentage})</p> 

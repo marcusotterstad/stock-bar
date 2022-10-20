@@ -7,7 +7,8 @@ import 'bootstrap/dist/css/bootstrap.css';
 
 // router components
 import NavBar from './Components/NavBar';
-import Menu from './Components/Menu';
+import Menu from './Components/Menu/Menu';
+import DrinkInfo from './Components/Menu/DrinkInfo';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -16,6 +17,7 @@ root.render(
         <NavBar />
         <Routes>
             <Route path="/menu" element={<Menu />}> </Route>
+            <Route path="/menu/:drink_id" element={<DrinkInfo />}> </Route>
         </Routes>
     </BrowserRouter>
   </React.StrictMode>

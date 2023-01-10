@@ -16,8 +16,9 @@ function NavBar() {
             <Link to="/menu" className="nav-link active" aria-current="page" href="#">Menu</Link>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="#">Link</a>
+            <Link to="/checkout" className="nav-link active" aria-current="page" href="#">Checkout</Link>
           </li>
+
         </ul>
         <form className="d-flex" role="search">
           <button className="btn btn-outline-success" type="submit">Login</button>

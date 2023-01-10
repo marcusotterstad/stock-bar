@@ -12,9 +12,6 @@ export function Drink({id, name, description, price, addToCart}) {
     var random_boolean = Math.random() < 0.5; 
     var random_percentage = Math.round(Math.random() * 10 + 1, 2) + '%';
 
-    const handleCart = () => {
-        addToCart(id, amount)
-    }
     return (
         <tr style={{marginTop:0, marginBottom:0}}>
             <th scope="row">{id}</th>
@@ -30,8 +27,7 @@ export function Drink({id, name, description, price, addToCart}) {
                 {amount}
                 <button onClick={() => {setAmount(amount + 1)}}>+</button>
                 <button onClick={() => {setAmount(amount - 1)}}>-</button>
-
-                <button onClick={handleCart}>Add to cart</button>
+                <button onClick={() => {addToCart(id, amount)}}>Add to cart</button>
             </td>
         </tr>
         )

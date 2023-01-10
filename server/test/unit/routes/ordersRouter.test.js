@@ -1,5 +1,4 @@
 const request = require('supertest');
-const chai = require('chai');  // Using Expect style
 const app = require('../../../index');
 const pool = require('../../../src/configs/db.config')
 

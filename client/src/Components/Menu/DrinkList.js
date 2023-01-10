@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 const {Drink} = require('./Drink');
 
-export function DrinkList() {
+// component that is a list of all drinks in the menu page
+export function DrinkList({addToCart}) {
  const [data, setData] = useState([]);
 
  useEffect(() => {
@@ -20,12 +21,13 @@ export function DrinkList() {
   name={drink.name}
   description={drink.description}
   price={drink.current_price}
+  addToCart={addToCart}
   />);
 
  return (
     <div>
         <table className="table">
-            <thead className="thead-light">
+            <thead className="thead-dark">
                 <tr>
                 <th scope="col">Id</th>
                 <th scope="col">Drink Name</th>

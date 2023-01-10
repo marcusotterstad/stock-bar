@@ -25,8 +25,8 @@ async function updatePrices (timeFrame) {
 
 //query current drink prices to currentDrinkPrices variable
     const currentDrinkPrices = await client.query({
-    rowMode: 'array',
-    text: 'SELECT drink_id, current_price FROM drinks',
+        rowMode: 'array',
+        text: 'SELECT drink_id, current_price FROM drinks',
     });
 
 //send those previous drink prices to the price_history table
@@ -42,7 +42,7 @@ async function updatePrices (timeFrame) {
         WHERE "order".time BETWEEN NOW() - INTERVAL '${timeFrame} MINUTES' AND NOW() 
         GROUP BY drink_id`
     });
-
+    
 //selects price info for each drink
     const drinkInformation = await client.query({
         rowMode: 'array',

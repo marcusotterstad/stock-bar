@@ -4,8 +4,12 @@ const pool = require('../configs/db.config');
 
 const {getQuery} = require('../utils/dbGet');
 
+
+// GET menu
 menuRouter.get("/", getQuery('SELECT * FROM "drinks"'));
 
+
+// GET single drink information
 menuRouter.get("/:drink_id", (req, res) => {
     const drink_id = req.params.drink_id;
     

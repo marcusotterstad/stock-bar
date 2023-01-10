@@ -5,8 +5,10 @@ const format = require('pg-format');
 
 const {getQuery} = require('../utils/dbGet')
 
+// GET all unfulfilled orders
 ordersRouter.get("/unfulfilled", getQuery('SELECT * FROM "order" WHERE fulfilled = false'));
 
+// POST new order to the database
 ordersRouter.post("/new-order", async (req, res) => {
     /*
     Example POST input body:
@@ -46,7 +48,7 @@ ordersRouter.post("/new-order", async (req, res) => {
     await client.query({
         rowMode: 'array',
         text: `INSERT INTO "order" (table_no) VALUES (${table_no}) RETURNING order_id`,
-        })
+    })
     //gets the returned order_id and inserts all the drinks in the order_details table
         .then((result) => insertOrderDetails(result.rows[0]))
     //send success message and status code
@@ -54,8 +56,10 @@ ordersRouter.post("/new-order", async (req, res) => {
             client.release()    
             res.status(201).send(message);
         })
-    });
+});
 
+
+// PUT to complete an order from the database by order_id
 ordersRouter.put("/complete-order/:order_id",  (req, res) => {
     const order_id = req.params['order_id'];
     pool.query('UPDATE "order" SET fulfilled=true WHERE order_id=$1 RETURNING *', [order_id], (error, results) => {

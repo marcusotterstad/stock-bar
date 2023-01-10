@@ -1,25 +1,14 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './index.css';
+import ReactDOM from 'react-dom/client';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.css';
-
-// router components
-import NavBar from './Components/NavBar';
-import Menu from './Components/Menu/Menu';
-import DrinkInfo from './Components/Menu/DrinkInfo';
+import App from './App';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-        <NavBar />
-        <Routes>
-            <Route path="/menu" element={<Menu />}> </Route>
-            <Route path="/menu/:drink_id" element={<DrinkInfo />}> </Route>
-        </Routes>
-    </BrowserRouter>
+    <App />
   </React.StrictMode>
 );
 

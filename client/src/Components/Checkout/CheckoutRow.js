@@ -6,7 +6,7 @@ function CheckoutRow({id, name, price, amount}) {
         <th scope="row">{name}</th>
         <td>{price}</td>
         <td><button onClick={() => {}}>+</button>{amount}<button>-</button></td>
-        <td>x</td>
+        <td><button>x</button></td>
     </tr>
   )
 }

@@ -2,12 +2,23 @@ import React from 'react';
 import { BsFillCaretUpFill,BsFillCaretDownFill } from "react-icons/bs";
 import { Link } from 'react-router-dom';
 
-import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { addItem, removeItem, selectItemQuantity } from '../../store/cartSlice';
 
 // Single row that contains drink information in the menu
-export function Drink({id, name, description, price, addToCart}) {
+export function Drink({id, name, description, price}) {
+    const quantity = useSelector(state => selectItemQuantity(state)(id));
+    const dispatch = useDispatch();  
 
-    const [amount, setAmount] = useState(0)
+    const handleAdd = () => {
+        dispatch(addItem(id));
+      }
+    
+      const handleRemove = () => {
+        dispatch(removeItem(id));
+      }
+
+    
     // TODO: implement through api up or down percentage
     var random_boolean = Math.random() < 0.5; 
     var random_percentage = Math.round(Math.random() * 10 + 1, 2) + '%';
@@ -24,10 +35,10 @@ export function Drink({id, name, description, price, addToCart}) {
             }</td>
             <td>{description}</td>
             <td>
-                {amount}
-                <button onClick={() => {setAmount(amount + 1)}}>+</button>
-                <button onClick={() => {setAmount(amount - 1)}}>-</button>
-                <button onClick={() => {addToCart(id, amount)}}>Add to cart</button>
+                {quantity == 0 ? "" : quantity}
+                <button onClick={() => {handleAdd()}}>+</button>
+                <button onClick={() => {handleRemove()}}>-</button>
+                <button>Add to cart</button>
             </td>
         </tr>
         )

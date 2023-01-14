@@ -6,7 +6,7 @@ export default function Menu({addToCart}) {
   return (
   <div>
     <h1 className="text-end me-4">Drink stock exchange</h1>
-    <DrinkList addToCart={addToCart} />
+    <DrinkList />
   </div>
   );
 }

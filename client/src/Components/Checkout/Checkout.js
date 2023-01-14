@@ -2,15 +2,14 @@ import React, { useState, useEffect } from 'react';
 import CheckoutRow from './CheckoutRow';
 
 
-function Checkout({cart}) {
+function Checkout() {
     const [data, setData] = useState([]);
-    const [amount, setAmount] = useState(0);
 
     useEffect(() => {
         const fetchData = async () => {
             await fetch("http://localhost:3000/menu")
             .then((response) => response.json())
-            .then((response) => {
+            .then((response) => {/*
                 const newObjs = []
                 for (const [cartItemId, amount] of Object.entries(cart)) {
                     for(let drinkItem of response) {
@@ -19,8 +18,8 @@ function Checkout({cart}) {
                         }
                     }
                 }
-            
-            setData(newObjs)
+            */
+            setData(response)
             });
         }
         fetchData();

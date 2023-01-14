@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 const {Drink} = require('./Drink');
 
 // component that is a list of all drinks in the menu page
-export function DrinkList({addToCart}) {
+export function DrinkList() {
  const [data, setData] = useState([]);
 
  useEffect(() => {
@@ -21,7 +21,6 @@ export function DrinkList({addToCart}) {
   name={drink.name}
   description={drink.description}
   price={drink.current_price}
-  addToCart={addToCart}
   />);
 
  return (

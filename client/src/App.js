@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 
@@ -12,21 +11,14 @@ import './App.css';
 
 
 function App() {
-  const [cart, setCart] = useState({})
-
-  const addToCart = (id, amount) => {
-    console.log(cart)
-    setCart({...cart, [id]: amount})
-  }
-
 
   return (
     <div className="App">
       <BrowserRouter>
         <NavBar />
         <Routes>
-            <Route path="/checkout" element={<Checkout cart={cart} />}> </Route>
-            <Route path="/menu" element={<Menu addToCart={addToCart} />}> </Route>
+            <Route path="/checkout" element={<Checkout />}> </Route>
+            <Route path="/menu" element={<Menu />}> </Route>
             <Route path="/menu/:drink_id" element={<DrinkInfo />}> </Route>
         </Routes>
       </BrowserRouter>

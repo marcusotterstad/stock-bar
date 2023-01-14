@@ -1,8 +1,12 @@
 import React from 'react';
 import {Link, NavLink} from 'react-router-dom';
 import { BsFillBarChartFill } from "react-icons/bs";
+import { useSelector } from 'react-redux';
+import { selectTotalQuantity } from '../store/cartSlice';
 
 function NavBar() {
+  const totalQuantity = useSelector(state => selectTotalQuantity(state));
+
   return (
     <div><nav className="navbar navbar-expand-lg bg-light">
     <div className="container-fluid">
@@ -21,7 +25,7 @@ function NavBar() {
 
         </ul>
         <form className="d-flex" role="search">
-          <button className="btn btn-outline-success" type="submit">Login</button>
+          <button className="btn btn-outline-success" type="submit">Cart: {totalQuantity}</button>
         </form>
       </div>
     </div>

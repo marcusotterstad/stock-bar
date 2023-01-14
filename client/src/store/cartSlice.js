@@ -38,6 +38,11 @@ export const selectItemQuantity = createSelector(
     cart => itemId => cart[itemId]?.quantity || 0
 );
 
+export const selectTotalQuantity = createSelector(
+    [selectCart],
+    cart => Object.values(cart).reduce((acc, item) => acc + item.quantity, 0)
+);
+
 export const { addItem, removeItem, clearCart } = cartSlice.actions;
 
 export default cartSlice.reducer;

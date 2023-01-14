@@ -16,7 +16,7 @@ function NavBar() {
             <Link to="/menu" className="nav-link active" aria-current="page" href="#">Menu</Link>
           </li>
           <li className="nav-item">
-            <Link to="/checkout" className="nav-link active" aria-current="page" href="#">Checkout</Link>
+            <Link to="/cart" className="nav-link active" aria-current="page" href="#">Cart</Link>
           </li>
 
         </ul>

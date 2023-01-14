@@ -5,7 +5,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import NavBar from './Components/NavBar';
 import Menu from './Components/Menu/Menu';
 import DrinkInfo from './Components/Menu/DrinkInfo';
-import Checkout from './Components/Checkout/Checkout';
+import Cart from './Components/Cart/Cart';
 
 import './App.css';
 
@@ -17,7 +17,7 @@ function App() {
       <BrowserRouter>
         <NavBar />
         <Routes>
-            <Route path="/checkout" element={<Checkout />}> </Route>
+            <Route path="/cart" element={<Cart />}> </Route>
             <Route path="/menu" element={<Menu />}> </Route>
             <Route path="/menu/:drink_id" element={<DrinkInfo />}> </Route>
         </Routes>

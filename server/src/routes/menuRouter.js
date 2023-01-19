@@ -17,15 +17,24 @@ menuRouter.get("/:drink_id", (req, res) => {
         pool.query('SELECT name, description, current_price FROM drinks WHERE drink_id = $1', [drink_id]),
         pool.query('SELECT DATE(timestamp) as timestamp, price FROM price_history WHERE drink_id = $1', [drink_id])
         ]).then(function([drink_info, price_history]) {
-            const {name, description, current_price} = drink_info.rows[0]
-            const formattedPriceHistory = price_history.rows.map(obj => [obj.price, obj.timestamp]);
-            const formattedObject = {
-                name: name,
-                description: description,
-                currentPrice: current_price,
-                priceHistory: formattedPriceHistory
+
+
+            //validate if the database returned a row
+
+            if(drink_info.rows.length != 0 && price_history.rows.length  != 0) {
+                const {name, description, current_price} = drink_info.rows[0]
+                const formattedPriceHistory = price_history.rows.map(obj => [obj.price, obj.timestamp]);
+                const formattedObject = {
+                    name: name,
+                    description: description,
+                    currentPrice: current_price,
+                    priceHistory: formattedPriceHistory
+                }
+                res.status(200).json(formattedObject)
             }
-            res.status(200).json(formattedObject)
+            else {
+                res.status(404).json({message: "drink does not exist in database"})
+            }
         }, function(error) {
         throw error;
         });
@@ -34,12 +43,20 @@ menuRouter.get("/:drink_id", (req, res) => {
 menuRouter.get("/:drink_id/price", async (req, res) => {
     const drink_id = req.params.drink_id;
 
-    pool.query('SELECT * FROM menu WHERE id = $1', [drink_id], (error, results) => {
+    pool.query('SELECT current_price FROM drinks WHERE drink_id = $1', [drink_id], (error, results) => {
         if (error) {
-            res.status(404).json({message: "failed to retrieve from database"});
-            throw error
+            res.status(404).json({message: "Failed to retrieve from database."});
+            return
         }
-        res.status(200).json(results.rows);
+
+        if(results.rows.length == 0) {
+            res.status(404).json({message: "Not found."})
+            return
+        }
+
+
+        res.status(200).send({price: results.rows[0].current_price});
+
     })
 })
 

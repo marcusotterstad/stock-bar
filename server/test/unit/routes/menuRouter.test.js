@@ -63,5 +63,4 @@ describe('GET /menu/:drink_id/price/', () => {
         expect(response.body.price).not.toBe(0);
     });
 
-
 });

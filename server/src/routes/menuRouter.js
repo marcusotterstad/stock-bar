@@ -29,8 +29,19 @@ menuRouter.get("/:drink_id", (req, res) => {
         }, function(error) {
         throw error;
         });
-
 });
+
+menuRouter.get("/:drink_id/price", async (req, res) => {
+    const drink_id = req.params.drink_id;
+
+    pool.query('SELECT * FROM menu WHERE id = $1', [drink_id], (error, results) => {
+        if (error) {
+            res.status(404).json({message: "failed to retrieve from database"});
+            throw error
+        }
+        res.status(200).json(results.rows);
+    })
+})
 
 console.log("Menu router up and running.")
 module.exports = menuRouter;

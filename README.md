@@ -11,3 +11,9 @@ Technologies used in the app:
 ### inspiration for this app:
 * https://www.tiktok.com/@stufftodointb/video/6883859886027853061
 * https://www.tiktok.com/@sarahhands/video/7112453214980607275
+
+
+
+## Security
+### For this app, I have taken the OWASP top 10 into account when securing this website.
+* TLS: This website uses TLS, to ensure traffic between the server remains secure.

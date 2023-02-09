@@ -31,7 +31,7 @@ function CartRow({id, name, quantity}) {
   return (
     <tr key={id}>
             <td><Link to={`/menu/${id}`}>{name}</Link></td>
-            <td>{price}</td>
+            <td>{price*quantity}</td>
         <td><button onClick={handleAdd}>+</button>{quantity}<button onClick={handleRemove}>-</button></td>
     </tr>
   )

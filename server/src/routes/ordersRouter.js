@@ -2,6 +2,7 @@ const express = require('express');
 const ordersRouter = express.Router();
 const pool = require('../configs/db.config');
 const format = require('pg-format');
+const {body, validationResult } = require('express-validator');
 
 const {getQuery} = require('../utils/dbGet')
 
@@ -9,7 +10,16 @@ const {getQuery} = require('../utils/dbGet')
 ordersRouter.get("/unfulfilled", getQuery('SELECT * FROM "order" WHERE fulfilled = false'));
 
 // POST new order to the database
-ordersRouter.post("/new-order", async (req, res) => {
+ordersRouter.post("/new-order", [
+    body('table_no').isInt().isLength({min: 0}),
+    body('drinks').isObject().notEmpty() ],
+    async (req, res) => {
+        const errors = validationResult(req);
+
+        if (!errors.isEmpty()) {
+          return res.status(400).json({ errors: errors.array() });
+        }
+        
     /*
     Example POST input body:
         {

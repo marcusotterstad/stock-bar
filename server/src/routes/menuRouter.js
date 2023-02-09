@@ -4,20 +4,17 @@ const pool = require('../configs/db.config');
 
 const {getQuery} = require('../utils/dbGet');
 
+const {check} = require('express-validator');
+const { param } = require('express-validator');
+
 
 // GET menu
 menuRouter.get("/", getQuery('SELECT * FROM "drinks"'));
 
 
 // GET single drink information
-menuRouter.get("/:drink_id", (req, res) => {
+menuRouter.get("/:drink_id", param('drink_id').isInt(), (req, res) => {
     const drink_id = req.params.drink_id;
-
-        if(isNaN(drink_id)) {
-            res.status(400).json({message: "Bad request. Make sure to input a number"})
-            return
-        }
-
 
     
     Promise.all([
@@ -26,7 +23,6 @@ menuRouter.get("/:drink_id", (req, res) => {
         ]).then(function([drink_info, price_history]) {
 
             //validate if the database returned a row
-
             if(drink_info.rows.length == 0 || price_history.rows.length  == 0) {
                 res.status(404).json({message: "drink does not exist in database"})
                 return
@@ -48,18 +44,13 @@ menuRouter.get("/:drink_id", (req, res) => {
         });
 });
 
-menuRouter.get("/:drink_id/price", async (req, res) => {
+menuRouter.get("/:drink_id/price", param('drink_id').isInt(), async (req, res) => {
     const drink_id = req.params.drink_id;
-
-    if(typeof Number(drink_id) !== "number") {
-        res.status(400).json({message: "Bad request. Make sure to input a number"})
-        return
-    }
 
     pool.query('SELECT current_price FROM drinks WHERE drink_id = $1', [drink_id], (error, results) => {
 
         if (error) {
-            res.status(404).json({message: "Failed to retrieve from database."});
+            res.status(500).json({message: "Failed to retrieve from database."});
             return
         }
 

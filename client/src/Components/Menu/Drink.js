@@ -11,7 +11,7 @@ export function Drink({id, name, description, price}) {
     const quantity = useSelector(state => selectItemQuantity(state)(id));
 
     const handleAdd = () => {
-        const item = {id: id, name: name};
+        const item = {id: id, name: name, price: price};
         dispatch(addItem({item}));
       }
 

@@ -1,11 +1,22 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {useDispatch} from 'react-redux';
 import { Link } from 'react-router-dom';
 import {addItem, removeItem} from '../../store/cartSlice';
 
 
 
-function Cart({id, name, quantity}) {
+function CartRow({id, name, quantity}) {
+  const [price, setPrice] = useState();
+
+  useEffect(() => {
+    const fetchData = async () => {
+        await fetch(`http://localhost:3000/menu/${id}/price`)
+    .then((response) => response.json())
+    .then((response) => {setPrice(response.price)});
+    }
+    fetchData();
+  }, []);
+
   const dispatch = useDispatch();
 
   const handleAdd = () => {
@@ -20,9 +31,10 @@ function Cart({id, name, quantity}) {
   return (
     <tr key={id}>
             <td><Link to={`/menu/${id}`}>{name}</Link></td>
+            <td>{price*quantity}</td>
         <td><button onClick={handleAdd}>+</button>{quantity}<button onClick={handleRemove}>-</button></td>
     </tr>
   )
 }
 
-export default Cart
+export default CartRow

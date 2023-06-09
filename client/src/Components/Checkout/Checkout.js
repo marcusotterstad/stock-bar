@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
-
+//TODO: FINISH CHECKOUT PAGE
 function Checkout() {
   const cart = useSelector(state => state.cart);
 

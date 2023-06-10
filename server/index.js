@@ -28,8 +28,8 @@ if (process.env.NODE_ENV !== 'test') {
 }
 
 
-//cron.schedule(`*/${timeFrame} * * * *`, () => {
-// updatePrices(timeFrame);
-//});
+cron.schedule(`*/${timeFrame} * * * *`, () => {
+  updatePrices(timeFrame);
+});
 
 module.exports = app;

@@ -19,7 +19,7 @@ function App() {
       <BrowserRouter>
         <NavBar />
         <Routes>
-            <Route path="/cart" element={<Cart />}> </Route>
+            <Route path="/cart" element={<Cart checkout={false} />}> </Route>
             <Route path="/menu" element={<Menu />}> </Route>
             <Route path="/checkout" element={<Checkout />}> </Route>
             <Route path="/menu/:drink_id" element={<DrinkInfo />}> </Route>

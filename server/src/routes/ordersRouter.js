@@ -63,7 +63,8 @@ ordersRouter.post("/new-order", [
         .then((result) => insertOrderDetails(result.rows[0]))
     //send success message and status code
         .then((message) => {
-            client.release()    
+            client.release()
+            console.log("Successfully POSTed /new-order")
             res.status(201).send(message);
         })
 });

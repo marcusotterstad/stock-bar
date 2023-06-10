@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import CartRow from './CartRow';
 
-function Cart() {
+function Cart({checkout}) {
     const cart = useSelector(state => state.cart);
     const cartEmpty = Object.keys(cart).length === 0;
 
@@ -23,7 +23,7 @@ function Cart() {
 
     return (
         <div>
-            <h1>Cart</h1>
+            {checkout ? <h1>Checkout</h1> : <h1>Cart</h1>}
             <table class="table">
                 <thead>
                     <tr>
@@ -36,9 +36,10 @@ function Cart() {
                     {CartRows}
                 </tbody>
             </table>
-            { cartEmpty ?
+            { checkout ? "" : (cartEmpty ?
                 <h2>Please add items to cart</h2> :
-                <Link to="/checkout" className="active" href="#">Checkout</Link>
+                <Link to="/checkout" className="active" href="#">Checkout</Link>) 
+                
             }
         </div>
     )

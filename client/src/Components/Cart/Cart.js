@@ -24,7 +24,7 @@ function Cart({checkout}) {
     return (
         <div>
             {checkout ? <h1>Checkout</h1> : <h1>Cart</h1>}
-            <table class="table">
+            <table className="table">
                 <thead>
                     <tr>
                     <th scope="col">Drink Name</th>

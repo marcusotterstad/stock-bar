@@ -12,7 +12,9 @@
 
 ### client
 - [ ] Add total to checkout
-- [ ] Make a Checkout button that sends order to server, and displays response information
+- [ ] Add skeleton to loading prices
+- [ ] Add dynamic pricing if it changes so people dont order for the wrong price
+- [x] Make a Checkout button that sends order to server, and displays response information
 - [ ] Fix top right Cart button, it resets cart
 - [ ] Look into all warnings in console
 - [ ] Actually create a home page

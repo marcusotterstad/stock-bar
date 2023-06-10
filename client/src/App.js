@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 
 // router components
+import Home from './Home/Home';
 import NavBar from './Components/NavBar';
 import Menu from './Components/Menu/Menu';
 import DrinkInfo from './Components/Menu/DrinkInfo';
@@ -19,6 +20,7 @@ function App() {
       <BrowserRouter>
         <NavBar />
         <Routes>
+            <Route path="/home" element={<Home />}> </Route>
             <Route path="/cart" element={<Cart checkout={false} />}> </Route>
             <Route path="/menu" element={<Menu />}> </Route>
             <Route path="/checkout" element={<Checkout />}> </Route>

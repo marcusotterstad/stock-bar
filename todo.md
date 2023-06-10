@@ -7,6 +7,7 @@
     - [client](#client)
     - [server](#server)
     - [overall-features](#overall-features)
+    - [current](#current)
 
 
 ### client
@@ -15,11 +16,12 @@
 - [ ] Fix top right Cart button, it resets cart
 - [ ] Look into all warnings in console
 - [ ] Actually create a home page
+- [ ] Make rows shorter in height
 
 ### server
 - [ ] Turn classified information into environment variables
   - db.config.js
-- [ ] Find out how the 
+- [ ] In GET /menu, also give change in percentage within the last x minutes
 
 
 ### overall-features
@@ -39,3 +41,5 @@
 - [ ] 
 
 
+### current
+- [ ] Make a Checkout button that sends order to server, and displays response information
